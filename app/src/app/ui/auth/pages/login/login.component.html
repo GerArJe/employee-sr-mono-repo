@@ -1,0 +1,85 @@
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <h1 class="ion-text-center">{{ "LOGIN.TITLE" | translate }}</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <!-- Email -->
+          <ion-item>
+            <ion-label position="floating">{{
+              "LOGIN.PLACEHOLDER_EMAIL" | translate
+            }}</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <div>
+            <ng-container *ngFor="let validation of validation_messages.email">
+              <ion-text color="danger">
+                <div
+                  *ngIf="
+                    loginForm.get('email')?.hasError(validation.type) &&
+                    (loginForm.get('email')?.dirty ||
+                      loginForm.get('email')?.touched)
+                  "
+                >
+                  {{ validation.message | translate }}
+                </div>
+              </ion-text>
+            </ng-container>
+          </div>
+          <!-- Password -->
+          <ion-item class="ion-margin-top ion-align-items-center">
+            <ion-label position="floating">{{
+              "LOGIN.PLACEHOLDER_PASSWORD" | translate
+            }}</ion-label>
+            <ion-input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+            ></ion-input>
+            <ion-icon
+              name="eye"
+              slot="end"
+              (click)="showHidePassword()"
+            ></ion-icon>
+          </ion-item>
+          <div class="warning">
+            <ng-container
+              *ngFor="let validation of validation_messages.password"
+            >
+              <ion-text color="danger">
+                <div
+                  *ngIf="
+                    loginForm.get('password')?.hasError(validation.type) &&
+                    (loginForm.get('password')?.dirty ||
+                      loginForm.get('password')?.touched)
+                  "
+                >
+                  {{ validation.message | translate }}
+                </div>
+              </ion-text>
+            </ng-container>
+          </div>
+          <p class="ion-text-end">
+            <a  (click)="goToRecoverPassword()">{{
+              "LOGIN.LABEL_FORGET_PASSWORD" | translate
+            }}</a>
+          </p>
+          <ion-button
+            class="ion-margin-top"
+            expand="block"
+            [disabled]="!loginForm.valid"
+            type="submit"
+          >
+            {{ "LOGIN.BUTTON" | translate }}</ion-button
+          >
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <!-- Button registrar -->
+  <p class="ion-text-center">
+    {{ "LOGIN.LABEL_NOT_HAVE_ACCOUNT" | translate }}
+    <a (click)="goToRegister()">{{ "LOGIN.LABEL_REGISTER" | translate }}</a>
+  </p>
+</ion-footer>

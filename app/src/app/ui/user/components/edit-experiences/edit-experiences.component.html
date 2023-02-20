@@ -1,0 +1,187 @@
+<ng-container *ngIf="isModal; else noModal">
+  <ion-modal [isOpen]="isOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="close()">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{
+            "EDIT_EXPERIENCES.TITLE_HEADER" | translate
+          }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ng-container>
+<ng-template #noModal>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-template>
+<ng-template #content>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="experienceEditing.id ? update() : create()"
+  >
+    <!-- Title -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_EXPERIENCES.TITLE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input formControlName="title"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.title">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('title')?.hasError(validation.type) &&
+              (form.get('title')?.dirty || form.get('title')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Company Name -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_EXPERIENCES.COMPANY_NAME_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input formControlName="companyName"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.companyName">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('companyName')?.hasError(validation.type) &&
+              (form.get('companyName')?.dirty ||
+                form.get('companyName')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Start date -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_EXPERIENCES.START_DATE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input id="date1" [value]="startDateFieldTransformed()"></ion-input>
+      <ion-popover trigger="date1" size="auto">
+        <ng-template>
+          <ion-datetime
+            formControlName="startDate"
+            presentation="date1"
+            locale="es-CO"
+            [showDefaultButtons]="true"
+            [cancelText]="cancelText"
+            [doneText]="doneText"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.startDate">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('startDate')?.hasError(validation.type) &&
+              (form.get('startDate')?.dirty || form.get('startDate')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- End date  -->
+    <ion-item>
+      <ion-checkbox slot="start" formControlName="present"></ion-checkbox>
+      <ion-label>{{ "EDIT_EXPERIENCES.PRESENT_LABEL" | translate }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="!presentField?.value">
+      <ion-label position="floating">{{
+        "EDIT_EXPERIENCES.END_DATE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input id="date2" [value]="endDateFieldTransformed()"></ion-input>
+      <ion-popover trigger="date2" size="auto">
+        <ng-template>
+          <ion-datetime
+            formControlName="endDate"
+            presentation="date2"
+            locale="es-CO"
+            [showDefaultButtons]="true"
+            [cancelText]="cancelText"
+            [doneText]="doneText"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <!-- Description -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_EXPERIENCES.DESCRIPTION_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-textarea
+        formControlName="description"
+        [autoGrow]="true"
+        [maxlength]="400"
+      ></ion-textarea>
+    </ion-item>
+    <ion-grid>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button
+            class="ion-margin-top"
+            expand="block"
+            [disabled]="form.invalid"
+            type="submit"
+          >
+            {{
+              (experienceEditing.id
+                ? "EDIT_EXPERIENCES.EDIT_BUTTON"
+                : "EDIT_EXPERIENCES.CREATE_BUTTON"
+              ) | translate
+            }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button expand="block" (click)="resetForm()">
+            {{ "EDIT_EXPERIENCES.RESET_BUTTON" | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <h2>{{ "EDIT_EXPERIENCES.TITLE" | translate }}</h2>
+  <!-- Experiences -->
+  <ion-item *ngFor="let experience of experiences; let index = index">
+    <ion-label class="ion-text-wrap">
+      <p>
+        {{ experience.title }}<br />{{ experience.companyName }} <br />{{
+          experience.startDate
+        }}
+        - {{ experience.endDate || ("EMPLOYEE_INFO.TODAY" | translate) }}
+      </p>
+    </ion-label>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" slot="start" (click)="onEdit(index)">
+        <ion-icon slot="icon-only" name="pencil"> </ion-icon>
+      </ion-button>
+      <ion-button fill="clear" slot="end" (click)="delete(experience, index)">
+        <ion-icon slot="icon-only" name="trash"> </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ng-template>

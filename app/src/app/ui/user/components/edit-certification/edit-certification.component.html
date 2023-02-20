@@ -1,0 +1,156 @@
+<ng-container *ngIf="isModal; else noModal">
+  <ion-modal [isOpen]="isOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="close()">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{
+            "EDIT_CERTIFICATION.TITLE_HEADER" | translate
+          }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ng-container>
+<ng-template #noModal>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-template>
+<ng-template #content>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="certificationEditing.id ? update() : create()"
+  >
+    <!-- Name -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_CERTIFICATION.NAME_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.name">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('name')?.hasError(validation.type) &&
+              (form.get('name')?.dirty || form.get('name')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Issuing organization -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_CERTIFICATION.ISSUE_ORGANIZATION_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input formControlName="issuingOrganization"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container
+        *ngFor="let validation of validation_messages.issuingOrganization"
+      >
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('issuingOrganization')?.hasError(validation.type) &&
+              (form.get('issuingOrganization')?.dirty ||
+                form.get('issuingOrganization')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_CERTIFICATION.ISSUE_DATE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input id="date1" [value]="issueDateFieldTransformed()"></ion-input>
+      <ion-popover trigger="date1" size="auto">
+        <ng-template>
+          <ion-datetime
+            formControlName="issueDate"
+            presentation="date1"
+            locale="es-CO"
+            [showDefaultButtons]="true"
+            [cancelText]="cancelText"
+            [doneText]="doneText"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.issueDate">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('issueDate')?.hasError(validation.type) &&
+              (form.get('issueDate')?.dirty || form.get('issueDate')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <ion-grid>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button
+            class="ion-margin-top"
+            expand="block"
+            [disabled]="form.invalid"
+            type="submit"
+          >
+            {{
+              (certificationEditing.id
+                ? "EDIT_CERTIFICATION.EDIT_BUTTON"
+                : "EDIT_CERTIFICATION.CREATE_BUTTON"
+              ) | translate
+            }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button expand="block" (click)="resetForm()">
+            {{ "EDIT_CERTIFICATION.RESET_BUTTON" | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <h2>{{ "EDIT_CERTIFICATION.TITLE" | translate }}</h2>
+  <!-- Certification -->
+  <ion-item *ngFor="let certification of certifications; let index = index">
+    <ion-label class="ion-text-wrap">
+      <p>
+        {{ certification.name }}<br />{{ certification.issuingOrganization }}
+        <br />{{ certification.issueDate }}
+      </p>
+    </ion-label>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" slot="start" (click)="onEdit(index)">
+        <ion-icon slot="icon-only" name="pencil"> </ion-icon>
+      </ion-button>
+      <ion-button
+        fill="clear"
+        slot="end"
+        (click)="delete(certification, index)"
+      >
+        <ion-icon slot="icon-only" name="trash"> </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ng-template>

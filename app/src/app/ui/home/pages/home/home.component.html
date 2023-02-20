@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="9">
+          <ion-searchbar
+            [placeholder]="searchText"
+            (ionFocus)="openFilters()"
+            [disabled]="
+              failGetRecommendations ||
+              (employees.length === 0 && !this.filters)
+            "
+          ></ion-searchbar>
+        </ion-col>
+        <ion-col size="3">
+          <ion-button (click)="clearFilter()">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col size="12">
+      <p *ngIf="filtersText" class="italic">
+        {{ "HOME.FILTERS_LABEL" | translate }}: {{ filtersText }}
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="failGetRecommendations; else recommendations">
+    <ion-col size="12">
+      <ion-button
+        *ngIf="countersRetry < 4; else noRetry"
+        expand="block"
+        fill="outline"
+        (click)="getRecommendations(true)"
+        >{{ "HOME.RETRY" | translate }}</ion-button
+      >
+      <ng-template #noRetry>
+        <p>
+          {{ "HOME.ERROR_MESSAGES.CONTACT_TEAM" | translate }}
+          <ion-icon name="hand-left" color="danger"></ion-icon>
+        </p>
+      </ng-template>
+    </ion-col>
+  </ion-row>
+  <ng-template #recommendations>
+    <app-employee-card
+      *ngFor="let employee of employees"
+      [employee]="employee"
+      (viewMoreClicked)="onViewMoreClicked(employee)"
+    ></app-employee-card>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-template>
+</ion-content>
+<app-employee-info
+  #employeeInfo
+  [employee]="employeeSelected"
+  [experiences]="experiencesEmployeeSelected"
+  [education]="educationEmployeeSelected"
+  [certifications]="certificationsEmployeeSelected"
+  [isModal]="true"
+  (contactInfoButtonClicked)="onContactInfoButtonClicked()"
+  (rattingButtonClicked)="onRattingButtonClicked()"
+></app-employee-info>
+<app-contact-info
+  #contactInfo
+  [cellphone]="employeeSelected.cellphone"
+  [email]="employeeSelected.email"
+></app-contact-info>
+<app-rating #rating (onSave)="onSave($event)"></app-rating>
+<app-filters
+  #filtersComponent
+  [profiles]="profiles"
+  [cities]="cities"
+  (filter)="filter($event)"
+></app-filters>

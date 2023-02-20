@@ -1,0 +1,318 @@
+<ng-container *ngIf="isModal; else noModal">
+  <ion-modal [isOpen]="isOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="close()">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{ "EMPLOYEE_EDIT.TITLE" | translate }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ng-container>
+<ng-template #noModal>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-template>
+<ng-template #content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Name -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EMPLOYEE_EDIT.NAME_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.name">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('name')?.hasError(validation.type) &&
+              (form.get('name')?.dirty || form.get('name')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- City -->
+    <ion-item (click)="selectCity.open()">
+      <ion-label>{{ "EMPLOYEE_EDIT.CITY_PLACEHOLDER" | translate }}</ion-label>
+      <app-searchable-select
+        #selectCity
+        title="EMPLOYEE_EDIT.CITY_PLACEHOLDER"
+        [data]="cities"
+        itemTextField="name"
+        [selected]="citySelected"
+        (selectedChanged)="onCityChange($event)"
+      ></app-searchable-select>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.cityId">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('cityId')?.hasError(validation.type) &&
+              (form.get('cityId')?.dirty || form.get('cityId')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Cellphone -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EMPLOYEE_EDIT.CELLPHONE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input
+        formControlName="cellphone"
+        [type]="'tel'"
+        [inputmode]="'tel'"
+      ></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.cellphone">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('cellphone')?.hasError(validation.type) &&
+              (form.get('cellphone')?.dirty || form.get('cellphone')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Email -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EMPLOYEE_EDIT.EMAIL_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('email')?.hasError(validation.type) &&
+              (form.get('email')?.dirty || form.get('email')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Profile -->
+    <ion-item (click)="selectProfile.open()">
+      <ion-label>{{
+        "EMPLOYEE_EDIT.PROFILE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <app-searchable-select
+        #selectProfile
+        title="EMPLOYEE_EDIT.PROFILE_PLACEHOLDER"
+        [data]="profiles"
+        itemTextField="name"
+        [selected]="profileSelected"
+        (selectedChanged)="onProfileChange($event)"
+      ></app-searchable-select>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.profileId">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('profileId')?.hasError(validation.type) &&
+              (form.get('profileId')?.dirty || form.get('profileId')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- About -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EMPLOYEE_EDIT.ABOUT_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-textarea
+        formControlName="about"
+        [autoGrow]="true"
+        [maxlength]="400"
+      ></ion-textarea>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.about">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('about')?.hasError(validation.type) &&
+              (form.get('about')?.dirty || form.get('about')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Experiences -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>{{ "EMPLOYEE_INFO.EXPERIENCE_LABEL" | translate }}</h2>
+        <ion-item *ngFor="let experience of experiences">
+          <ion-label class="ion-text-wrap">
+            <p>
+              {{ experience.title }}<br />{{ experience.companyName }} <br />{{
+                experience.startDate
+              }}
+              - {{ experience.endDate || ("EMPLOYEE_INFO.TODAY" | translate) }}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-label>
+      <ion-button
+        fill="clear"
+        slot="end"
+        class="align-self-start"
+        (click)="editExperiences()"
+        ><ion-icon slot="icon-only" name="pencil"></ion-icon
+      ></ion-button>
+    </ion-item>
+    <!-- Education -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>{{ "EMPLOYEE_INFO.EDUCATION_LABEL" | translate }}</h2>
+        <ion-item *ngFor="let item of education">
+          <ion-label class="ion-text-wrap">
+            <p>
+              {{ item.school }}<br />{{ item.degree }} <br />{{
+                item.startDate
+              }}
+              -
+              {{ item.endDate || ("EMPLOYEE_INFO.TODAY" | translate) }}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-label>
+      <ion-button
+        fill="clear"
+        slot="end"
+        class="align-self-start"
+        (click)="editEducation()"
+        ><ion-icon slot="icon-only" name="pencil"></ion-icon
+      ></ion-button>
+    </ion-item>
+    <!-- Certifications -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>{{ "EMPLOYEE_INFO.CERTIFICATION_LABEL" | translate }}</h2>
+        <ion-item *ngFor="let certification of certifications">
+          <ion-label class="ion-text-wrap">
+            <p>
+              {{ certification.name }}<br />{{
+                certification.issuingOrganization
+              }}
+              <br />{{ certification.issueDate }}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-label>
+      <ion-button
+        fill="clear"
+        slot="end"
+        class="align-self-start"
+        (click)="editCertification()"
+        ><ion-icon slot="icon-only" name="pencil"></ion-icon
+      ></ion-button>
+    </ion-item>
+    <!-- Skills -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>{{ "EMPLOYEE_INFO.SKILLS_LABEL" | translate }}</h2>
+        <p *ngFor="let skill of employee.skills">{{ skill }}</p>
+      </ion-label>
+      <ion-button fill="clear" slot="end" (click)="editSkills()"
+        ><ion-icon slot="icon-only" name="pencil"></ion-icon
+      ></ion-button>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.skills">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('skills')?.hasError(validation.type) &&
+              (form.get('skills')?.dirty || form.get('skills')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Soft Skills -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>{{ "EMPLOYEE_INFO.SOFT_SKILLS_LABEL" | translate }}</h2>
+        <p *ngFor="let softSkill of employee.softSkills">{{ softSkill }}</p>
+      </ion-label>
+      <ion-button fill="clear" slot="end" (click)="editSoftSkills()"
+        ><ion-icon slot="icon-only" name="pencil"></ion-icon
+      ></ion-button>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.softSkills">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('softSkills')?.hasError(validation.type) &&
+              (form.get('softSkills')?.dirty || form.get('softSkills')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      [disabled]="form.invalid"
+      type="submit"
+    >
+      {{ "EMPLOYEE_EDIT.SAVE_BUTTON" | translate }}
+    </ion-button>
+  </form>
+</ng-template>
+<app-add-list
+  #addList
+  [list]="(editList === 'skills' ? employee.skills : employee.softSkills) || []"
+  (saveButtonClicked)="onSaveList($event)"
+></app-add-list>
+<app-edit-experiences
+  [isModal]="true"
+  [employee]="employee"
+  [experiences]="experiences"
+></app-edit-experiences>
+<app-edit-education
+  [isModal]="true"
+  [employee]="employee"
+  [education]="education"
+></app-edit-education>
+<app-edit-certification
+  [isModal]="true"
+  [employee]="employee"
+  [certifications]="certifications"
+></app-edit-certification>

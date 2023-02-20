@@ -1,0 +1,69 @@
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <form [formGroup]="form" (ngSubmit)="onAdd()">
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="9">
+                <ion-searchbar
+                  [placeholder]="searchText"
+                  formControlName="text"
+                ></ion-searchbar>
+                <div>
+                  <ng-container
+                    *ngFor="let validation of validation_messages.text"
+                  >
+                    <ion-text color="danger">
+                      <div
+                        *ngIf="
+                          form.get('text')?.hasError(validation.type) &&
+                          (form.get('text')?.dirty || form.get('text')?.touched)
+                        "
+                      >
+                        {{ validation.message | translate }}
+                      </div>
+                    </ion-text>
+                  </ng-container>
+                </div>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button type="submit">
+                  <ion-icon slot="icon-only" name="add"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item *ngFor="let item of listEdited; let index = index">
+        <ion-label>{{ item }}</ion-label>
+        <ion-button fill="clear" slot="end" (click)="deleteItem(index)"
+          ><ion-icon slot="icon-only" name="trash"></ion-icon
+        ></ion-button>
+      </ion-item>
+      <ion-grid>
+        <ion-row class="ion-margin-top">
+          <ion-col>
+            <ion-button
+              expand="block"
+              [disabled]="listEdited.length === 0"
+              (click)="save()"
+            >
+              {{ "ADD_LIST.ADD_BUTTON" | translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-top">
+          <ion-col>
+            <ion-button expand="block" (click)="cancel()">
+              {{ "ADD_LIST.CANCEL_BUTTON" | translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>

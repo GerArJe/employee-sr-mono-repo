@@ -1,0 +1,27 @@
+<ion-content class="ion-padding">
+  <ng-container *ngIf="employee.id; else noUserEmployeeInfo">
+    <app-header-employee-info
+      [employee]="employee"
+      (editProfileClicked)="employeeEdit.open()"
+    ></app-header-employee-info>
+    <app-employee-info
+      [employee]="employee"
+      [experiences]="experiences"
+      [education]="education"
+      [certifications]="certifications"
+    ></app-employee-info>
+  </ng-container>
+  <ng-template #noUserEmployeeInfo>
+    <p>{{ "EMPLOYEE_PAGE.ERROR_MESSAGES.GET_INITIAL_DATA" | translate }}</p>
+  </ng-template>
+</ion-content>
+<app-employee-edit
+  #employeeEdit
+  [isModal]="true"
+  [employee]="employee"
+  [profiles]="profiles"
+  [cities]="cities"
+  [experiences]="experiences"
+  [education]="education"
+  [certifications]="certifications"
+></app-employee-edit>

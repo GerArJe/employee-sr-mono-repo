@@ -1,0 +1,116 @@
+<ng-container *ngIf="isModal; else noModal">
+  <ion-modal [isOpen]="isOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="close()">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title
+            >{{ employee.name }} {{ employee.rating | number : "1.0-1"
+            }}<ion-icon name="star" color="warning"></ion-icon
+          ></ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+        <ion-button
+          class="ion-margin-top"
+          expand="block"
+          (click)="contactInfoButtonClicked.emit()"
+        >
+          {{ "EMPLOYEE_INFO.CONTACT_INFO_BUTTON" | translate }}</ion-button
+        >
+        <ion-button
+          class="ion-margin-top"
+          expand="block"
+          (click)="rattingButtonClicked.emit()"
+        >
+          {{ "EMPLOYEE_INFO.RATING_BUTTON" | translate }}</ion-button
+        >
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ng-container>
+<ng-template #noModal>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-template>
+<ng-template #content>
+  <!-- Profile -->
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{ "EMPLOYEE_INFO.PROFILE_LABEL" | translate }}</h2>
+      <p>{{ employee.profile }}</p>
+    </ion-label>
+  </ion-item>
+  <!-- About -->
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{ "EMPLOYEE_INFO.ABOUT_LABEL" | translate }}</h2>
+      <p>{{ employee.about }}</p>
+    </ion-label>
+  </ion-item>
+  <!-- Experiences -->
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{ "EMPLOYEE_INFO.EXPERIENCE_LABEL" | translate }}</h2>
+      <ion-item *ngFor="let experience of experiences">
+        <ion-label class="ion-text-wrap">
+          <p>
+            {{ experience.title }}<br />{{ experience.companyName }} <br />{{
+              experience.startDate
+            }}
+            - {{ experience.endDate || ("EMPLOYEE_INFO.TODAY" | translate) }}
+          </p></ion-label
+        >
+      </ion-item>
+    </ion-label>
+  </ion-item>
+  <!-- Education -->
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{ "EMPLOYEE_INFO.EDUCATION_LABEL" | translate }}</h2>
+      <ion-item *ngFor="let item of education">
+        <ion-label class="ion-text-wrap">
+          <p>
+            {{ item.school }}<br />{{ item.degree }} <br />{{ item.startDate }}
+            -
+            {{ item.endDate || ("EMPLOYEE_INFO.TODAY" | translate) }}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-label>
+  </ion-item>
+  <!-- Certifications -->
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{ "EMPLOYEE_INFO.CERTIFICATION_LABEL" | translate }}</h2>
+      <ion-item *ngFor="let certification of certifications">
+        <ion-label class="ion-text-wrap">
+          <p>
+            {{ certification.name }}<br />{{
+              certification.issuingOrganization
+            }}
+            <br />{{ certification.issueDate }}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-label>
+  </ion-item>
+  <!-- Skills -->
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{ "EMPLOYEE_INFO.SKILLS_LABEL" | translate }}</h2>
+      <p *ngFor="let skill of employee.skills">{{ skill }}</p>
+    </ion-label>
+  </ion-item>
+  <!-- Soft skills -->
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{ "EMPLOYEE_INFO.SOFT_SKILLS_LABEL" | translate }}</h2>
+      <p *ngFor="let softSkill of employee.softSkills">{{ softSkill }}</p>
+    </ion-label>
+  </ion-item>
+</ng-template>

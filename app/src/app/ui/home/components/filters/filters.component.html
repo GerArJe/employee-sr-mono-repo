@@ -1,0 +1,50 @@
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="close()">
+            <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>{{ "FILTERS.TITLE" | translate }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="form" (ngSubmit)="onFilter()">
+        <!-- City -->
+        <ion-item class="ion-margin-top" (click)="selectCity.open()">
+          <ion-label>{{ "FILTERS.CITY_PLACEHOLDER" | translate }}</ion-label>
+          <app-searchable-select
+            #selectCity
+            title="FILTERS.CITY_PLACEHOLDER"
+            [data]="cities"
+            itemTextField="name"
+            [selected]="citySelected"
+            (selectedChanged)="onCityChange($event)"
+          ></app-searchable-select>
+        </ion-item>
+        <!-- Profile -->
+        <ion-item class="ion-margin-top" (click)="selectProfile.open()">
+          <ion-label>{{ "FILTERS.PROFILE_PLACEHOLDER" | translate }}</ion-label>
+          <app-searchable-select
+            #selectProfile
+            title="FILTERS.PROFILE_PLACEHOLDER"
+            [data]="profiles"
+            itemTextField="name"
+            [selected]="profileSelected"
+            (selectedChanged)="onProfileChange($event)"
+          ></app-searchable-select>
+        </ion-item>
+        <ion-button
+          class="ion-margin-top"
+          expand="block"
+          [disabled]="!form.valid"
+          [type]="'submit'"
+        >
+          {{ "FILTERS.FILTER_BUTTON" | translate }}</ion-button
+        >
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

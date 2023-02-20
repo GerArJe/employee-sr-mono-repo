@@ -1,0 +1,44 @@
+<form [formGroup]="form">
+  <!-- Company Name -->
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">{{
+      "REGISTER.PLACEHOLDER_COMPANY" | translate
+    }}</ion-label>
+    <ion-input formControlName="companyName"></ion-input>
+  </ion-item>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.companyName">
+      <ion-text color="danger">
+        <div
+          *ngIf="
+            form.get('companyName')?.hasError(validation.type) &&
+            (form.get('companyName')?.dirty || form.get('companyName')?.touched)
+          "
+        >
+          {{ validation.message | translate }}
+        </div>
+      </ion-text>
+    </ng-container>
+  </div>
+  <!-- NIT -->
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">{{
+      "REGISTER.PLACEHOLDER_NIT" | translate
+    }}</ion-label>
+    <ion-input formControlName="nit"></ion-input>
+  </ion-item>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.nit">
+      <ion-text color="danger">
+        <div
+          *ngIf="
+            form.get('nit')?.hasError(validation.type) &&
+            (form.get('nit')?.dirty || form.get('nit')?.touched)
+          "
+        >
+          {{ validation.message | translate }}
+        </div>
+      </ion-text>
+    </ng-container>
+  </div>
+</form>

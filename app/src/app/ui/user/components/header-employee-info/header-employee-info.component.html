@@ -1,0 +1,48 @@
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="12" class="center">
+      <ion-avatar>
+        <img
+          alt="Silhouette of a person's head"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+      </ion-avatar>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" class="center">
+      <ion-button (click)="editProfileClicked.emit()">
+        {{ "HEADER_EMPLOYEE_INFO.EDIT_INFO_BUTTON" | translate }}
+        <ion-icon slot="end" name="pencil"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!-- Name -->
+<ion-item>
+  <ion-label class="ion-text-wrap">
+    <h2>{{ "HEADER_EMPLOYEE_INFO.NAME_LABEL" | translate }}</h2>
+    <p>{{ employee.name }}</p>
+  </ion-label>
+</ion-item>
+<!-- City -->
+<ion-item>
+  <ion-label class="ion-text-wrap">
+    <h2>{{ "HEADER_EMPLOYEE_INFO.CITY_LABEL" | translate }}</h2>
+    <p>{{ employee.city }}</p>
+  </ion-label>
+</ion-item>
+<!-- Cellphone -->
+<ion-item>
+  <ion-label class="ion-text-wrap">
+    <h2>{{ "HEADER_EMPLOYEE_INFO.CELLPHONE_LABEL" | translate }}</h2>
+    <p>{{ employee.cellphone }}</p>
+  </ion-label>
+</ion-item>
+<!-- Email -->
+<ion-item>
+  <ion-label class="ion-text-wrap">
+    <h2>{{ "HEADER_EMPLOYEE_INFO.EMAIL_LABEL" | translate }}</h2>
+    <p>{{ employee.email }}</p>
+  </ion-label>
+</ion-item>

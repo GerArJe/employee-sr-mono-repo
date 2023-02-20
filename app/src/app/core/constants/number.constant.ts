@@ -1,0 +1,2 @@
+export const TIMEOUT_SERVICES = 15000;
+export const DEFAULT_DURATION_TOAST = 1500;

@@ -1,0 +1,74 @@
+<form [formGroup]="form">
+  <!-- Employee Name -->
+  <ion-item class="ion-margin-top">
+    <ion-label position="floating">{{
+      "REGISTER.PLACEHOLDER_EMPLOYEE_NAME" | translate
+    }}</ion-label>
+    <ion-input formControlName="employeeName"></ion-input>
+  </ion-item>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.employeeName">
+      <ion-text color="danger">
+        <div
+          *ngIf="
+            form.get('employeeName')?.hasError(validation.type) &&
+            (form.get('employeeName')?.dirty ||
+              form.get('employeeName')?.touched)
+          "
+        >
+          {{ validation.message | translate }}
+        </div>
+      </ion-text>
+    </ng-container>
+  </div>
+  <!-- Profile id -->
+  <ion-item class="ion-margin-top" (click)="selectProfile.open()">
+    <ion-label>{{ "REGISTER.PLACEHOLDER_PROFILE" | translate }}</ion-label>
+    <app-searchable-select
+      #selectProfile
+      title="REGISTER.PLACEHOLDER_PROFILE"
+      [data]="profiles"
+      itemTextField="name"
+      (selectedChanged)="onProfileChange($event)"
+    ></app-searchable-select>
+  </ion-item>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.profileId">
+      <ion-text color="danger">
+        <div
+          *ngIf="
+            form.get('profileId')?.hasError(validation.type) &&
+            (form.get('profileId')?.dirty || form.get('profileId')?.touched)
+          "
+        >
+          {{ validation.message | translate }}
+        </div>
+      </ion-text>
+    </ng-container>
+  </div>
+  <!-- City id -->
+  <ion-item class="ion-margin-top" (click)="selectCity.open()">
+    <ion-label>{{ "REGISTER.PLACEHOLDER_CITY" | translate }}</ion-label>
+    <app-searchable-select
+      #selectCity
+      title="REGISTER.PLACEHOLDER_CITY"
+      [data]="cities"
+      itemTextField="name"
+      (selectedChanged)="onCityChange($event)"
+    ></app-searchable-select>
+  </ion-item>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.cityId">
+      <ion-text color="danger">
+        <div
+          *ngIf="
+            form.get('cityId')?.hasError(validation.type) &&
+            (form.get('cityId')?.dirty || form.get('cityId')?.touched)
+          "
+        >
+          {{ validation.message | translate }}
+        </div>
+      </ion-text>
+    </ng-container>
+  </div>
+</form>

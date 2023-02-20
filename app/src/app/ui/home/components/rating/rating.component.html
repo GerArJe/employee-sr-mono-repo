@@ -1,0 +1,42 @@
+<ion-modal [isOpen]="isOpen" [backdropDismiss]="false" [keyboardClose]="true">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{ "RATING.RATE_LABEL" | translate }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="close()">
+            {{ "RATING.CANCEL_BUTTON" | translate }}
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-button
+            *ngFor="let item of rating; let index = index"
+            fill="clear"
+            color="warning"
+            (click)="onChangeRating(index)"
+          >
+            <ion-icon
+              *ngIf="item; else outline"
+              slot="icon-only"
+              name="star"
+            ></ion-icon>
+            <ng-template #outline>
+              <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+            </ng-template>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="center">
+          <ion-button (click)="saveRating()">
+            {{ "RATING.SAVE_BUTTON" | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-content>
+  </ng-template>
+</ion-modal>

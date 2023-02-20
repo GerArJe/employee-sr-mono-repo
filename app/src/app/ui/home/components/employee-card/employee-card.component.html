@@ -1,0 +1,38 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ employee.name }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="4">
+          <ion-row>
+            <ion-col size="12">{{ employee.profile }}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">{{ employee.city }}</ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="4">
+          <ion-row class="ion-justify-content-center">
+            <p>
+              {{ employee.rating | number : "1.0-1"
+              }}<ion-icon name="star" color="warning"></ion-icon>
+            </p>
+          </ion-row>
+        </ion-col>
+        <ion-col size="4">
+          <ion-row class="ion-justify-content-center">
+            <ion-button
+              fill="outline"
+              shape="round"
+              class="card-button-size"
+              (click)="viewMoreClicked.emit()"
+              >{{ "EMPLOYEE_CARD.VIEW_MORE" | translate }}</ion-button
+            >
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

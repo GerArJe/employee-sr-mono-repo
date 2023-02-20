@@ -1,0 +1,39 @@
+<div *ngIf="selected.length; else placeholder">
+  <span *ngFor="let item of selected; let last = last">
+    {{ leaf(item) }}{{ last ? "" : ", " }}
+  </span>
+</div>
+<ng-template #placeholder
+  ><ion-icon name="caret-down-outline"></ion-icon
+></ng-template>
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">
+            {{ "SEARCHABLE_SELECT.BUTTON_CANCEL" | translate }}
+          </ion-button>
+        </ion-buttons>
+        <ion-title>{{ title | translate }}</ion-title>
+        <ion-buttons slot="end" *ngIf="multiple">
+          <ion-button (click)="select()">
+            {{ "SEARCHABLE_SELECT.BUTTON_CONFIRM" | translate }}
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-searchbar
+        placeholder="Buscar"
+          (ionChange)="onSearchChange($any($event))"
+        ></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-item *ngFor="let item of filtered" (click)="itemSelected()">
+        <ion-checkbox slot="start" [(ngModel)]="item.selected"></ion-checkbox>
+        <ion-label>{{ leaf(item) }}</ion-label>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>

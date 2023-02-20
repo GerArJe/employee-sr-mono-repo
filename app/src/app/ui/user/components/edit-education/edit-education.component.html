@@ -1,0 +1,172 @@
+<ng-container *ngIf="isModal; else noModal">
+  <ion-modal [isOpen]="isOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="close()">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{ "EDIT_EDUCATION.TITLE_HEADER" | translate }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ng-container>
+<ng-template #noModal>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</ng-template>
+<ng-template #content>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="educationEditing.id ? update() : create()"
+  >
+    <!-- School -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_EDUCATION.SCHOOL_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input formControlName="school"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.school">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('school')?.hasError(validation.type) &&
+              (form.get('school')?.dirty || form.get('school')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- degree -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_EDUCATION.DEGREE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input formControlName="degree"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.degree">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('degree')?.hasError(validation.type) &&
+              (form.get('degree')?.dirty || form.get('degree')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Start date -->
+    <ion-item>
+      <ion-label position="floating">{{
+        "EDIT_EDUCATION.START_DATE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input id="date1" [value]="startDateFieldTransformed()"></ion-input>
+      <ion-popover trigger="date1" size="auto">
+        <ng-template>
+          <ion-datetime
+            formControlName="startDate"
+            presentation="date1"
+            locale="es-CO"
+            [showDefaultButtons]="true"
+            [cancelText]="cancelText"
+            [doneText]="doneText"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.startDate">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              form.get('startDate')?.hasError(validation.type) &&
+              (form.get('startDate')?.dirty || form.get('startDate')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- End date -->
+    <ion-item>
+      <ion-checkbox slot="start" formControlName="present"></ion-checkbox>
+      <ion-label>{{ "EDIT_EXPERIENCES.PRESENT_LABEL" | translate }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="!presentField?.value">
+      <ion-label position="floating">{{
+        "EDIT_EXPERIENCES.END_DATE_PLACEHOLDER" | translate
+      }}</ion-label>
+      <ion-input id="date2" [value]="endDateFieldTransformed()"></ion-input>
+      <ion-popover trigger="date2" size="auto">
+        <ng-template>
+          <ion-datetime
+            formControlName="endDate"
+            presentation="date2"
+            locale="es-CO"
+            [showDefaultButtons]="true"
+            [cancelText]="cancelText"
+            [doneText]="doneText"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+    <ion-grid>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button
+            class="ion-margin-top"
+            expand="block"
+            [disabled]="form.invalid"
+            type="submit"
+          >
+            {{
+              (educationEditing.id
+                ? "EDIT_EDUCATION.EDIT_BUTTON"
+                : "EDIT_EDUCATION.CREATE_BUTTON"
+              ) | translate
+            }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button expand="block" (click)="resetForm()">
+            {{ "EDIT_EDUCATION.RESET_BUTTON" | translate }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <h2>{{ "EDIT_EDUCATION.TITLE" | translate }}</h2>
+  <!-- Education -->
+  <ion-item *ngFor="let item of education; let index = index">
+    <ion-label class="ion-text-wrap">
+      <p>
+        {{ item.school }}<br />{{ item.degree }} <br />{{ item.startDate }}
+        -
+        {{ item.endDate || ("EMPLOYEE_INFO.TODAY" | translate) }}
+      </p>
+    </ion-label>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" slot="start" (click)="onEdit(index)">
+        <ion-icon slot="icon-only" name="pencil"> </ion-icon>
+      </ion-button>
+      <ion-button fill="clear" slot="end" (click)="delete(item, index)">
+        <ion-icon slot="icon-only" name="trash"> </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ng-template>

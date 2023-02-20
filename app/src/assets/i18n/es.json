@@ -1,0 +1,265 @@
+{
+  "LOGIN": {
+    "TITLE": "Bienvenido",
+    "PLACEHOLDER_EMAIL": "Email",
+    "PLACEHOLDER_PASSWORD": "Contraseña",
+    "LABEL_FORGET_PASSWORD": "Olvidaste la contraseña?",
+    "BUTTON": "Iniciar sesión",
+    "LABEL_OR_LOGIN_WITH_OTHER": "O inicia con",
+    "LABEL_NOT_HAVE_ACCOUNT": "No tienes cuenta?",
+    "LABEL_REGISTER": "Registrarse",
+    "ERROR_MESSAGES": {
+      "FIELD_REQUIRED": "Campo requerido",
+      "EMAIL_PATTERN": "Este no es un email válido",
+      "PASSWORD_MIN_LENGTH": "Mínimo 6 letras para la contraseña",
+      "LOGIN": "No se pudo iniciar sesión",
+      "ERROR": "Error"
+    },
+    "SUCCESS_MESSAGE": "Login exitoso"
+  },
+  "REGISTER": {
+    "LABEL_REGISTER": "Registrarse",
+    "COMPANY": "Empresa",
+    "EMPLOYEE": "Empleado",
+    "PLACEHOLDER_COMPANY": "Nombre de la empresa",
+    "PLACEHOLDER_NIT": "NIT",
+    "PLACEHOLDER_EMPLOYEE_NAME": "Nombre",
+    "PLACEHOLDER_EMAIL": "Email",
+    "PLACEHOLDER_PASSWORD": "Contraseña",
+    "PLACEHOLDER_CONFIRM_PASSWORD": "Confirmar contraseña",
+    "PLACEHOLDER_PROFILE": "Perfil",
+    "PLACEHOLDER_CITY": "Ciudad",
+    "BUTTON": "Registrarse",
+    "ERROR_MESSAGES": {
+      "FIELD_REQUIRED": "Campo requerido",
+      "EMAIL_PATTERN": "Este no es un email válido",
+      "EMAIL_EXISTS": "El email ya existe",
+      "PASSWORD_MIN_LENGTH": "Mínimo 6 letras para la contraseña",
+      "PASSWORD_MATCHING": "La contraseña no coincide",
+      "COMPANY_NAME_MIN_LENGTH": "Mínimo 3 letras para el nombre de la empresa",
+      "NIT_PATTERN": "Solo se permiten números",
+      "NIT_MIN_LENGTH": "El NIT debe estar compuesto por 10 números",
+      "NIT_MAX_LENGTH": "El NIT debe estar compuesto por 10 números",
+      "EMPLOYEE_NAME_MIN_LENGTH": "Mínimo 3 letras para el nombre",
+      "ERROR": "Error",
+      "ERROR_CREATE_ACCOUNT": "No se pudo crear la cuenta",
+      "LOAD_DATA": "No se pudo cargar la información inténtelo mas tarde"
+    },
+    "SUCCESS_MESSAGE": "Registro exitoso"
+  },
+  "SAVING": "Guardando",
+  "LOADING": "Cargando",
+  "OK": "OK",
+  "SEARCHABLE_SELECT": {
+    "BUTTON_CANCEL": "Cancelar",
+    "BUTTON_CONFIRM": "Confirmar",
+    "SELECT": "Seleccionar"
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Recuperar contraseña",
+    "INFO": " Introduce el email. Se enviara un email para restaurar la contraseña.",
+    "PLACEHOLDER_EMAIL": "Email",
+    "BUTTON": "Enviar",
+    "LABEL_REMEMBER": "Recordó la contraseña?",
+    "LABEL_LOGIN": "Login",
+    "ERROR_MESSAGES": {
+      "FIELD_REQUIRED": "Campo requerido",
+      "EMAIL_PATTERN": "Este no es un email válido",
+      "ERROR": "Error",
+      "SEND_EMAIL": "No se pudo enviar el correo para recuperar contraseña"
+    },
+    "TITLE_SUCCESS_MESSAGE": "Solicitud enviada",
+    "TEXT_SUCCESS_MESSAGE": "Revisa tu correo para restablecer la constraseña"
+  },
+  "SEARCH": "Buscar",
+  "HOME": {
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "GET_RECOMMENDATIONS": "No pudieron obtener las recomendaciones",
+      "CONTACT_TEAM": "No ha sido posible cargar la información, regresa mas tarde o contacta a nuestro equipo",
+      "GET_EMPLOYEE_INFO": "No se pudo obtener la información de la persona",
+      "SAVE_RATING": "No se pudo guardar la calificación"
+    },
+    "RETRY": "Intentar nuevamente",
+    "SUCCESS_MESSAGES": {
+      "SAVE_RATING": "Se guardo la calificación correctamente"
+    },
+    "FILTERS_LABEL": "Filtros"
+  },
+  "EMPLOYEE_CARD": {
+    "VIEW_MORE": "Ver mas"
+  },
+  "EMPLOYEE_INFO": {
+    "PROFILE_LABEL": "Perfil",
+    "ABOUT_LABEL": "Acerca",
+    "EXPERIENCE_LABEL": "Experiencia",
+    "EDUCATION_LABEL": "Educación",
+    "CERTIFICATION_LABEL": "Certificados",
+    "SKILLS_LABEL": "Habilidades técnicas",
+    "SOFT_SKILLS_LABEL": "Habilidades blandas",
+    "TODAY": "Presente",
+    "CONTACT_INFO_BUTTON": "Ver datos de contacto",
+    "RATING_BUTTON": "Calificar"
+  },
+  "EMPLOYEE_CONTACT_INFO": {
+    "DATA_LABEL": "Datos de contacto",
+    "CELLPHONE_LABEL": "Celular",
+    "EMAIL_LABEL": "Email",
+    "CLOSE_BUTTON": "Cerrar"
+  },
+  "RATING": {
+    "RATE_LABEL": "Calificar",
+    "CANCEL_BUTTON": "Cancelar",
+    "SAVE_BUTTON": "Guardar"
+  },
+  "COMPANY_INFO": {
+    "EDIT_INFO_BUTTON": "Editar perfil",
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "GET_COMPANY": "No se pudo obtener la información del usuario"
+    },
+    "COMPANY_NAME_LABEL": "Nombre de la empresa",
+    "NIT_LABEL": "NIT",
+    "EMPLOYEES_NUMBER_LABEL": "Cantidad de empleados",
+    "CREATION_DATE_LABEL": "Fecha de creación",
+    "CLASSIFICATION_LABEL": "Clasificación",
+    "WEB_LABEL": "Pagina web de la empresa",
+    "NO_INFORMATION_LABEL": "No hay información",
+    "CELLPHONE_LABEL": "Celular"
+  },
+  "COMPANY_EDIT": {
+    "EDIT_LABEL": "Editar",
+    "NAME_LABEL": "Nombre de la empresa",
+    "NIT_LABEL": "NIT",
+    "EMPLOYEES_NUMBER_PLACEHOLDER": "Cantidad de empleados",
+    "CREATION_DATE_PLACEHOLDER": "Fecha de creación",
+    "CLASSIFICATION_PLACEHOLDER": "Clasificación",
+    "CELLPHONE_PLACEHOLDER": "Celular",
+    "WEB": "Pagina web de la empresa",
+    "ERROR_MESSAGES": {
+      "FIELD_REQUIRED": "Campo requerido",
+      "INITIAL_DATA": "No se pudo cargar la información",
+      "ERROR": "Error",
+      "UPDATE": "No se pudo actualizar la información"
+    },
+    "SEND_BUTTON": "Enviar",
+    "SUCCESS_MESSAGE": "Guardado exitoso"
+  },
+  "FILTERS": {
+    "TITLE": "Filtrar",
+    "CITY_PLACEHOLDER": "Ciudad",
+    "PROFILE_PLACEHOLDER": "Perfil",
+    "ERROR_MESSAGES": {
+      "FIELD_REQUIRED": "Campo requerido"
+    },
+    "FILTER_BUTTON": "Filtrar"
+  },
+  "EMPLOYEE_PAGE": {
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "GET_INITIAL_DATA": "No se puedo cargar la información"
+    }
+  },
+  "HEADER_EMPLOYEE_INFO": {
+    "EDIT_INFO_BUTTON": "Editar perfil",
+    "NAME_LABEL": "Nombre",
+    "CITY_LABEL": "Ciudad",
+    "CELLPHONE_LABEL": "Celular",
+    "EMAIL_LABEL": "Email"
+  },
+  "EMPLOYEE_EDIT": {
+    "TITLE": "Editar",
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "GET_INITIAL_DATA": "No se puedo cargar la información",
+      "FIELD_REQUIRED": "Campo requerido",
+      "NAME_MIN_LENGTH": "Mínimo 3 letras para el nombre",
+      "EMAIL_PATTERN": "Este no es un email válido",
+      "UPDATE": "No se pudo actualizar la información"
+    },
+    "NAME_PLACEHOLDER": "Nombre",
+    "CITY_PLACEHOLDER": "Ciudad",
+    "CELLPHONE_PLACEHOLDER": "Celular",
+    "EMAIL_PLACEHOLDER": "Email",
+    "PROFILE_PLACEHOLDER": "Perfil",
+    "ABOUT_PLACEHOLDER": "Acerca",
+    "SAVE_BUTTON": "Guardar",
+    "SUCCESS_MESSAGE": "Guardado exitoso"
+  },
+  "ADD_LIST": {
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "FIELD_REQUIRED": "Campo requerido",
+      "MIN_LENGTH": "Mínimo 3 letras"
+    },
+    "ADD_BUTTON": "Agregar",
+    "CANCEL_BUTTON": "Cancelar"
+  },
+  "EDIT_EXPERIENCES": {
+    "TITLE_HEADER": "Editar experiencias",
+    "TITLE": "Experiencias",
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "FIELD_REQUIRED": "Campo requerido",
+      "DELETE": "No se pudo eliminar",
+      "MIN_LENGTH": "Mínimo 3 caracteres",
+      "CREATE": "No se pudo crear",
+      "UPDATE": "No se pudo actualizar"
+    },
+    "TITLE_PLACEHOLDER": "Titulo",
+    "COMPANY_NAME_PLACEHOLDER": "Nombre de la compañía",
+    "START_DATE_PLACEHOLDER": "Fecha de inicio",
+    "END_DATE_PLACEHOLDER": "Fecha fin",
+    "DESCRIPTION_PLACEHOLDER": "Descripción",
+    "CREATE_BUTTON": "Crear",
+    "PRESENT_LABEL": "Presente",
+    "SUCCESS_MESSAGE": "Guardado exitoso",
+    "RESET_BUTTON": "Limpiar",
+    "EDIT_BUTTON": "Editar"
+  },
+  "ION_DATE_TIME": {
+    "CANCEL": "Cancelar",
+    "DONE": "Aceptar"
+  },
+  "EDIT_EDUCATION": {
+    "TITLE_HEADER": "Editar educación",
+    "TITLE": "Educación",
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "FIELD_REQUIRED": "Campo requerido",
+      "DELETE": "No se pudo eliminar",
+      "MIN_LENGTH": "Mínimo 3 caracteres",
+      "CREATE": "No se pudo crear",
+      "UPDATE": "No se pudo actualizar"
+    },
+    "SCHOOL_PLACEHOLDER": "Institución",
+    "DEGREE_PLACEHOLDER": "Titulo",
+    "START_DATE_PLACEHOLDER": "Fecha de inicio",
+    "END_DATE_PLACEHOLDER": "Fecha fin",
+    "CREATE_BUTTON": "Crear",
+    "PRESENT_LABEL": "Presente",
+    "SUCCESS_MESSAGE": "Guardado exitoso",
+    "RESET_BUTTON": "Limpiar",
+    "EDIT_BUTTON": "Editar"
+  },
+  "EDIT_CERTIFICATION": {
+    "TITLE_HEADER": "Editar certificaciones",
+    "TITLE": "Certificaciones",
+    "ERROR_MESSAGES": {
+      "ERROR": "Error",
+      "FIELD_REQUIRED": "Campo requerido",
+      "DELETE": "No se pudo eliminar",
+      "MIN_LENGTH": "Mínimo 3 caracteres",
+      "CREATE": "No se pudo crear",
+      "UPDATE": "No se pudo actualizar"
+    },
+    "NAME_PLACEHOLDER": "Nombre",
+    "ISSUE_ORGANIZATION_PLACEHOLDER": "Organización que otorga",
+    "ISSUE_DATE_PLACEHOLDER": "Fecha de entrega",
+    "CREATE_BUTTON": "Crear",
+    "PRESENT_LABEL": "Presente",
+    "SUCCESS_MESSAGE": "Guardado exitoso",
+    "RESET_BUTTON": "Limpiar",
+    "EDIT_BUTTON": "Editar"
+  }
+}

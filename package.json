@@ -1,0 +1,19 @@
+{
+  "name": "employee-sr",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "api",
+    "app"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build --workspace=app",
+    "start": "npm run start --workspace=api",
+    "start:app": "npm run start --workspace=app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

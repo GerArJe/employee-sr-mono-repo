@@ -1,0 +1,12 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button *ngIf="userType === UserTypes.COMPANY" tab="home">
+      <ion-icon name="home-sharp"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button
+      [tab]="'user'"
+    >
+      <ion-icon name="person-circle"> </ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

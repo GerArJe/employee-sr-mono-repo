@@ -1,0 +1,147 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button default-href="#"></ion-back-button>
+  </ion-buttons>
+  <ion-title>{{ "REGISTER.LABEL_REGISTER" | translate }}</ion-title>
+</ion-toolbar>
+<ion-content class="ion-padding">
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <!-- User Type -->
+    <ion-radio-group
+      formControlName="userType"
+      (ionChange)="onChangeUserType()"
+    >
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6">
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+              <ion-radio [value]="userType.COMPANY"></ion-radio>
+              <ion-label class="ion-margin-start">{{
+                "REGISTER.COMPANY" | translate
+              }}</ion-label>
+            </ion-row>
+          </ion-col>
+          <ion-col size="6">
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+              <ion-radio [value]="userType.EMPLOYEE"></ion-radio>
+              <ion-label class="ion-margin-start">{{
+                "REGISTER.EMPLOYEE" | translate
+              }}</ion-label>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-radio-group>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.userType">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              registerForm.get('userType')?.hasError(validation.type) &&
+              (registerForm.get('userType')?.dirty ||
+                registerForm.get('userType')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <ng-container [ngSwitch]="userTypeField?.value">
+      <app-company-form
+        *ngSwitchCase="userType.COMPANY"
+        [form]="registerForm"
+      ></app-company-form>
+      <app-employee-form
+        *ngSwitchCase="userType.EMPLOYEE"
+        [form]="registerForm"
+        [profiles]="profiles"
+        [cities]="cities"
+      ></app-employee-form>
+    </ng-container>
+    <!-- Email -->
+    <ion-item class="ion-margin-top">
+      <ion-label position="floating">{{
+        "LOGIN.PLACEHOLDER_EMAIL" | translate
+      }}</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              registerForm.get('email')?.hasError(validation.type) &&
+              (registerForm.get('email')?.dirty ||
+                registerForm.get('email')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Password -->
+    <ion-item class="ion-margin-top ion-align-items-center">
+      <ion-label position="floating">{{
+        "REGISTER.PLACEHOLDER_PASSWORD" | translate
+      }}</ion-label>
+      <ion-input
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+      ></ion-input>
+      <ion-icon name="eye" slot="end" (click)="showHidePassword()"></ion-icon>
+    </ion-item>
+    <div class="warning">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              registerForm.get('password')?.hasError(validation.type) &&
+              (registerForm.get('password')?.dirty ||
+                registerForm.get('password')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <!-- Confirm password -->
+    <ion-item class="ion-margin-top ion-align-items-center">
+      <ion-label position="floating">{{
+        "REGISTER.PLACEHOLDER_CONFIRM_PASSWORD" | translate
+      }}</ion-label>
+      <ion-input
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="confirmPassword"
+      ></ion-input>
+      <ion-icon name="eye" slot="end" (click)="showHidePassword()"></ion-icon>
+    </ion-item>
+    <div class="warning">
+      <ng-container
+        *ngFor="let validation of validation_messages.confirmPassword"
+      >
+        <ion-text color="danger">
+          <div
+            *ngIf="
+              registerForm.get('confirmPassword')?.hasError(validation.type) &&
+              (registerForm.get('confirmPassword')?.dirty ||
+                registerForm.get('confirmPassword')?.touched)
+            "
+          >
+            {{ validation.message | translate }}
+          </div>
+        </ion-text>
+      </ng-container>
+    </div>
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      [disabled]="!registerForm.valid"
+      type="submit"
+    >
+      {{ "REGISTER.BUTTON" | translate }}</ion-button
+    >
+  </form>
+</ion-content>

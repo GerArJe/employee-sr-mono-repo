@@ -1,0 +1,122 @@
+<ng-container>
+  <ng-container *ngIf="company.id; else noUserCompanyInfo">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12" class="center">
+          <ion-avatar>
+            <img
+              alt="Silhouette of a person's head"
+              src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            />
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="center">
+          <ion-button (click)="companyEditComponent.open()">
+            {{ "COMPANY_INFO.EDIT_INFO_BUTTON" | translate }}
+            <ion-icon slot="end" name="pencil"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- Company name -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>{{ "COMPANY_INFO.COMPANY_NAME_LABEL" | translate }}</h2>
+        <p>{{ company.name }}</p>
+      </ion-label>
+    </ion-item>
+    <!-- NIT -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>{{ "COMPANY_INFO.NIT_LABEL" | translate }}</h2>
+        <p>{{ company.nit }}</p>
+      </ion-label>
+    </ion-item>
+    <!-- Employees number -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          {{ "COMPANY_INFO.EMPLOYEES_NUMBER_LABEL" | translate }}
+        </h2>
+        <p *ngIf="company.employeesNumber; else noEmployeesNumber">
+          {{ company.employeesNumber }}
+        </p>
+        <ng-template #noEmployeesNumber>
+          <p>
+            {{ "COMPANY_INFO.NO_INFORMATION_LABEL" | translate }}
+          </p>
+        </ng-template>
+      </ion-label>
+    </ion-item>
+    <!-- Creation date -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          {{ "COMPANY_INFO.CREATION_DATE_LABEL" | translate }}
+        </h2>
+        <p *ngIf="company.creationDate; else noCreationDate">
+          {{ company.creationDate | date : 'dd.MM.yyyy' }}
+        </p>
+        <ng-template #noCreationDate>
+          <p>
+            {{ "COMPANY_INFO.NO_INFORMATION_LABEL" | translate }}
+          </p>
+        </ng-template>
+      </ion-label>
+    </ion-item>
+    <!-- Classification -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          {{ "COMPANY_INFO.CLASSIFICATION_LABEL" | translate }}
+        </h2>
+        <p *ngIf="company.classification; else noClassificationId">
+          {{ company.classification }}
+        </p>
+        <ng-template #noClassificationId>
+          <p>
+            {{ "COMPANY_INFO.NO_INFORMATION_LABEL" | translate }}
+          </p>
+        </ng-template>
+      </ion-label>
+    </ion-item>
+    <!-- Cellphone -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          {{ "COMPANY_INFO.CELLPHONE_LABEL" | translate }}
+        </h2>
+        <p *ngIf="company.cellphone; else noCellphone">{{ company.cellphone }}</p>
+        <ng-template #noCellphone>
+          <p>
+            {{ "COMPANY_INFO.NO_INFORMATION_LABEL" | translate }}
+          </p>
+        </ng-template>
+      </ion-label>
+    </ion-item>
+    <!-- Web -->
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          {{ "COMPANY_INFO.WEB_LABEL" | translate }}
+        </h2>
+        <p *ngIf="company.web; else noWeb">{{ company.web }}</p>
+        <ng-template #noWeb>
+          <p>
+            {{ "COMPANY_INFO.NO_INFORMATION_LABEL" | translate }}
+          </p>
+        </ng-template>
+      </ion-label>
+    </ion-item>
+  </ng-container>
+  <ng-template #noUserCompanyInfo>
+    <p>{{ "COMPANY_INFO.ERROR_MESSAGES.GET_COMPANY" | translate }}</p>
+  </ng-template>
+</ng-container>
+<app-company-edit
+  #companyEdit
+  [company]="company"
+  [companyClassifications]="companyClassifications"
+></app-company-edit>

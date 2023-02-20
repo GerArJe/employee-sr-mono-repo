@@ -1,0 +1,187 @@
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="close()">
+            <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>{{ "COMPANY_EDIT.EDIT_LABEL" | translate }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <!-- Company name -->
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          <h2>{{ "COMPANY_EDIT.NAME_LABEL" | translate }}</h2>
+          <p>{{ company.name }}</p>
+        </ion-label>
+      </ion-item>
+      <!-- NIT -->
+      <ion-item>
+        <ion-label class="ion-text-wrap">
+          <h2>{{ "COMPANY_EDIT.NIT_LABEL" | translate }}</h2>
+          <p>{{ company.nit }}</p>
+        </ion-label>
+      </ion-item>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Employees number -->
+        <ion-item>
+          <ion-label position="floating">{{
+            "COMPANY_EDIT.EMPLOYEES_NUMBER_PLACEHOLDER" | translate
+          }}</ion-label>
+          <ion-input
+            formControlName="employeesNumber"
+            [type]="'number'"
+            [inputmode]="'numeric'"
+          ></ion-input>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validation_messages.employeesNumber"
+          >
+            <ion-text color="danger">
+              <div
+                *ngIf="
+                  form.get('employeesNumber')?.hasError(validation.type) &&
+                  (form.get('employeesNumber')?.dirty ||
+                    form.get('employeesNumber')?.touched)
+                "
+              >
+                {{ validation.message | translate }}
+              </div>
+            </ion-text>
+          </ng-container>
+        </div>
+        <!-- Creation date -->
+        <ion-item>
+          <ion-label position="floating">{{
+            "COMPANY_EDIT.CREATION_DATE_PLACEHOLDER" | translate
+          }}</ion-label>
+          <ion-input
+            id="date"
+            [value]="creationDateFieldTransformed()"
+          ></ion-input>
+          <ion-popover trigger="date" size="auto">
+            <ng-template>
+              <ion-datetime
+                formControlName="creationDate"
+                presentation="date"
+                locale="es-CO"
+                [showDefaultButtons]="true"
+                [cancelText]="cancelText"
+                [doneText]="doneText"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validation_messages.creationDate"
+          >
+            <ion-text color="danger">
+              <div
+                *ngIf="
+                  form.get('creationDate')?.hasError(validation.type) &&
+                  (form.get('creationDate')?.dirty ||
+                    form.get('creationDate')?.touched)
+                "
+              >
+                {{ validation.message | translate }}
+              </div>
+            </ion-text>
+          </ng-container>
+        </div>
+        <!-- Classification -->
+        <ion-item>
+          <ion-select
+            [placeholder]="placeholderClassification"
+            formControlName="classificationId"
+            [interfaceOptions]="customAlertOptions"
+          >
+            <ion-select-option
+              *ngFor="let companyClassification of companyClassifications"
+              [value]="companyClassification.id"
+              >{{ companyClassification.name }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validation_messages.classificationId"
+          >
+            <ion-text color="danger">
+              <div
+                *ngIf="
+                  form.get('classificationId')?.hasError(validation.type) &&
+                  (form.get('classificationId')?.dirty ||
+                    form.get('classificationId')?.touched)
+                "
+              >
+                {{ validation.message | translate }}
+              </div>
+            </ion-text>
+          </ng-container>
+        </div>
+        <!-- Cellphone -->
+        <ion-item>
+          <ion-label position="floating">{{
+            "COMPANY_EDIT.CELLPHONE_PLACEHOLDER" | translate
+          }}</ion-label>
+          <ion-input
+            formControlName="cellphone"
+            [type]="'tel'"
+            [inputmode]="'tel'"
+          ></ion-input>
+        </ion-item>
+        <div>
+          <ng-container
+            *ngFor="let validation of validation_messages.cellphone"
+          >
+            <ion-text color="danger">
+              <div
+                *ngIf="
+                  form.get('cellphone')?.hasError(validation.type) &&
+                  (form.get('cellphone')?.dirty ||
+                    form.get('cellphone')?.touched)
+                "
+              >
+                {{ validation.message | translate }}
+              </div>
+            </ion-text>
+          </ng-container>
+        </div>
+        <!-- Web -->
+        <ion-item>
+          <ion-label position="floating">{{
+            "COMPANY_EDIT.WEB" | translate
+          }}</ion-label>
+          <ion-input formControlName="web" [inputmode]="'url'"></ion-input>
+        </ion-item>
+        <div>
+          <ng-container *ngFor="let validation of validation_messages.web">
+            <ion-text color="danger">
+              <div
+                *ngIf="
+                  form.get('web')?.hasError(validation.type) &&
+                  (form.get('web')?.dirty || form.get('web')?.touched)
+                "
+              >
+                {{ validation.message | translate }}
+              </div>
+            </ion-text>
+          </ng-container>
+        </div>
+        <ion-button
+          class="ion-margin-top"
+          expand="block"
+          [disabled]="!form.valid"
+          [type]="'submit'"
+        >
+          {{ "COMPANY_EDIT.SEND_BUTTON" | translate }}</ion-button
+        >
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
