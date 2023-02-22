@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./rating.component.scss'],
 })
 export class RatingComponent {
-  @Output() onSave: EventEmitter<number> = new EventEmitter();
+  @Output() save: EventEmitter<number> = new EventEmitter();
 
   isOpen: boolean = false;
   rating: boolean[] = Array(5).fill(false);
@@ -28,7 +28,7 @@ export class RatingComponent {
 
   saveRating() {
     const counter = this.rating.filter((value) => value === true).length;
-    this.onSave.emit(counter);
+    this.save.emit(counter);
     this.close();
   }
 }

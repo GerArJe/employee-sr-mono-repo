@@ -7,11 +7,22 @@
     "api",
     "app"
   ],
+  "engines": {
+    "npm": "8.6.0"
+  },
   "main": "index.js",
   "scripts": {
     "build": "npm run build --workspace=app",
     "start": "npm run start --workspace=api",
-    "start:app": "npm run start --workspace=app"
+    "start:app": "npm run start --workspace=app",
+    "lint": "npm run lint --workspace=api && npm run lint --workspace=app"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "build",
+      "dist",
+      "app/android/*"
+    ]
   },
   "keywords": [],
   "author": "",

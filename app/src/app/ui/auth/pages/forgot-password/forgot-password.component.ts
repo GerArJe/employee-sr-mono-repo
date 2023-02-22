@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -20,7 +20,7 @@ import { VALIDATION_MESSAGES_FORGOT_PASSWORD } from '../../../../core/constants/
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent{
   forgotPasswordForm: FormGroup;
   validation_messages = VALIDATION_MESSAGES_FORGOT_PASSWORD;
 
@@ -42,8 +42,6 @@ export class ForgotPasswordComponent implements OnInit {
       ],
     });
   }
-
-  ngOnInit() {}
 
   async recoverPassword() {
     if (this.forgotPasswordForm.valid) {

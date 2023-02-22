@@ -1,18 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-contact-info',
   templateUrl: './contact-info.component.html',
   styleUrls: ['./contact-info.component.scss'],
 })
-export class ContactInfoComponent implements OnInit {
+export class ContactInfoComponent {
   @Input() cellphone?: string;
   @Input() email?: string;
   isOpen: boolean = false;
-
-  constructor() {}
-
-  ngOnInit() {}
 
   open() {
     this.isOpen = true;

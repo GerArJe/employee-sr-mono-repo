@@ -72,7 +72,7 @@
   [cellphone]="employeeSelected.cellphone"
   [email]="employeeSelected.email"
 ></app-contact-info>
-<app-rating #rating (onSave)="onSave($event)"></app-rating>
+<app-rating #rating (save)="onSave($event)"></app-rating>
 <app-filters
   #filtersComponent
   [profiles]="profiles"
