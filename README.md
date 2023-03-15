@@ -150,9 +150,9 @@ Enable the sing in method email and password
 
 <a id="install-dependencies"></a>
 ## Install Dependencies
-
+From the root run the command:
 ```
-npm install --legacy-peer-deps
+npm install
 ```
 
 <a id="API-workspace"></a>
@@ -165,6 +165,15 @@ To connect with the Firebase admin SDK, you have to generate a private key from 
 Once you have the generated private key, change the name and put it in the next path:
 
 ___api\src\firebase\serviceAccountKey.json___
+
+### Create .env file
+Create an environment file called .env in the api folder and add the following variables:
+
+```
+PORT=YOUR_PORT // Change YOUR_PORT for your port
+JWT_KEY=YOUR_KEY // Change YOUR_KEY for your jwt key
+```
+
 
 <a id="App-workspace"></a>
 ## App workspace
