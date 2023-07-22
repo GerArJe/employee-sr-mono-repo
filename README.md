@@ -45,6 +45,10 @@ Recommendation system that helps to identify, recommend and describe the contact
 - Angular 15+
 - Ionic 6+
 - Firebase project
+- numpy
+- scipy
+- pandas
+- scikit-learn
 
 <a id="firebase-project"></a>
 ## Firebase project
@@ -191,7 +195,7 @@ npm start
 <a id="run-APP"></a>
 ## Run APP
 ```
-npm start:app
+npm run app
 ```
 
 <a id="demo"></a>
